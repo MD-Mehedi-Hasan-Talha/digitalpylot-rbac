@@ -9,11 +9,11 @@ import styles from './sidebar.module.css';
 const navItems = [
   { name: 'Dashboard', href: '/dashboard', icon: '📊', permission: 'page:dashboard' },
   { name: 'Users', href: '/users', icon: '👥', permission: 'page:users' },
-  { name: 'Leads', href: '/leads', icon: '🎯', permission: 'page:leads' },
-  { name: 'Tasks', href: '/tasks', icon: '📝', permission: 'page:tasks' },
-  { name: 'Reports', href: '/reports', icon: '📈', permission: 'page:reports' },
+  { name: 'Leads', href: '#', icon: '🎯', permission: 'page:leads' },
+  { name: 'Tasks', href: '#', icon: '📝', permission: 'page:tasks' },
+  { name: 'Reports', href: '#', icon: '📈', permission: 'page:reports' },
   { name: 'Audit Log', href: '/audit-log', icon: '📜', permission: 'page:audit_log' },
-  { name: 'Settings', href: '/settings', icon: '⚙️', permission: 'page:settings' },
+  { name: 'Settings', href: '#', icon: '⚙️', permission: 'page:settings' },
 ];
 
 export default function Sidebar() {

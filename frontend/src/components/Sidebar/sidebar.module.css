@@ -130,6 +130,7 @@
   font-size: 14px;
   font-weight: 500;
   transition: all 0.2s ease;
+  cursor: pointer;
 }
 
 .navItem:hover {
@@ -149,6 +150,11 @@
   width: 20px;
   display: flex;
   justify-content: center;
+  cursor: pointer;
+}
+
+.navText {
+  cursor: pointer;
 }
 
 .hasSub {
