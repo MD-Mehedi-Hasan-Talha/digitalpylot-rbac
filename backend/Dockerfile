@@ -1,54 +1,34 @@
-# Use Node.js 20 as the base image
+# Stage 1: Build Phase
 FROM node:20-alpine AS builder
 
-# Set working directory
 WORKDIR /app
 
-# Install pnpm
-RUN npm install -g pnpm
+COPY package.json package-lock.json* ./
 
-# Copy package files
-COPY package.json pnpm-lock.yaml ./
+RUN npm install
 
-# Install dependencies
-RUN pnpm install --frozen-lockfile
-
-# Copy the rest of the application
 COPY . .
 
-# Generate Prisma client
-RUN pnpm prisma:generate
+RUN npx prisma generate
 
-# Build the application
-RUN pnpm build
+RUN npm run build
 
-# --- Production Image ---
 FROM node:20-alpine
 
 WORKDIR /app
 
-# Install pnpm
-RUN npm install -g pnpm
+ENV NODE_ENV=production
 
-# Copy package.json and pnpm-lock.yaml
-COPY package.json pnpm-lock.yaml ./
+COPY package.json package-lock.json* ./
 
-# Copy only production dependencies (now includes prisma client)
-RUN pnpm install --prod --frozen-lockfile
+RUN npm install --omit=dev
 
-# Copy the generated client from the builder stage
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/node_modules/@prisma/client ./node_modules/@prisma/client
 
-# Copy built files from the builder stage
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/prisma ./prisma
 
-# Expose the API port
 EXPOSE 5000
 
-# Set environment variables
-ENV NODE_ENV=production
-
-# Start the application
-CMD ["pnpm", "start"]
+CMD ["npm", "start"]
