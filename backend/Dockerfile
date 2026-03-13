@@ -33,13 +33,16 @@ RUN npm install -g pnpm
 # Copy package.json and pnpm-lock.yaml
 COPY package.json pnpm-lock.yaml ./
 
-# Install only production dependencies
+# Copy only production dependencies (now includes prisma client)
 RUN pnpm install --prod --frozen-lockfile
+
+# Copy the generated client from the builder stage
+COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
+COPY --from=builder /app/node_modules/@prisma/client ./node_modules/@prisma/client
 
 # Copy built files from the builder stage
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/prisma ./prisma
-COPY --from=builder /app/generated ./generated
 
 # Expose the API port
 EXPOSE 5000
