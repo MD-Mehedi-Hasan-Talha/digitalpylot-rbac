@@ -76,7 +76,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } finally {
       api.setToken(null);
       setState({ user: null, accessToken: null, isLoading: false });
-      router.push('/login');
+      router.push('/');
     }
   };
 
