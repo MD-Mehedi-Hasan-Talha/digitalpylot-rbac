@@ -28,7 +28,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       try {
         // The API client's request method handles 401 and refresh automatically.
         // We'll call /auth/refresh (silent refresh) to see if we have a valid session.
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/auth/refresh`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/refresh`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include',
