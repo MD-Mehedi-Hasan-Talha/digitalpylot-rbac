@@ -39,6 +39,7 @@ RUN pnpm install --prod --frozen-lockfile
 # Copy built files from the builder stage
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/generated ./generated
 
 # Expose the API port
 EXPOSE 5000
