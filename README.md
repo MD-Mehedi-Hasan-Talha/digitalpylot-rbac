@@ -44,7 +44,7 @@ DigitalPylot is a premium enterprise-grade administration portal featuring a rob
 ### Prerequisites
 - [Node.js](https://nodejs.org/) (v18+)
 - [pnpm](https://pnpm.io/)
-- PostgreSQL (Installed locally)
+- [Docker & Docker Compose](https://www.docker.com/products/docker-desktop/)
 
 ### Installation & Setup
 
@@ -54,7 +54,13 @@ DigitalPylot is a premium enterprise-grade administration portal featuring a rob
    cd digitalpylot
    ```
 
-2. **Backend Setup**:
+2. **Full Stack with Docker**:
+   ```bash
+   # Spin up Database and Backend
+   docker-compose up --build -d
+   ```
+
+3. **Manual Backend Setup (Optional)**:
    ```bash
    cd backend
    pnpm install
@@ -63,9 +69,9 @@ DigitalPylot is a premium enterprise-grade administration portal featuring a rob
    pnpm start
    ```
 
-3. **Frontend Setup**:
+4. **Frontend Setup**:
    ```bash
-   cd ../frontend
+   cd frontend
    pnpm install
    pnpm dev
    ```
