@@ -82,7 +82,7 @@ router.get(
   authorize('page:users'),
   async (req: Request, res: Response) => {
     try {
-      const user = await UserService.getById(req.params.id);
+      const user = await UserService.getById(req.params.id as string);
       res.json({ data: user });
     } catch (error) {
       if (error instanceof NotFoundError) {
@@ -104,7 +104,7 @@ router.patch(
       const { email, name, roleId, managerId } = req.body;
 
       const user = await UserService.update(
-        req.params.id,
+        req.params.id as string,
         { email, name, roleId, managerId },
         req.user!.roleLevel
       );
@@ -113,7 +113,7 @@ router.patch(
         actorId: req.user!.sub,
         action: 'user.updated',
         targetType: 'user',
-        targetId: req.params.id,
+        targetId: req.params.id as string,
         metadata: { email, name, roleId },
       });
 
@@ -147,8 +147,8 @@ router.patch(
       }
 
       const user = await UserService.updateStatus(
-        req.params.id,
-        status,
+        req.params.id as string,
+        status as string,
         req.user!.roleLevel
       );
 
@@ -156,7 +156,7 @@ router.patch(
         actorId: req.user!.sub,
         action: `user.status_changed`,
         targetType: 'user',
-        targetId: req.params.id,
+        targetId: req.params.id as string,
         metadata: { newStatus: status },
       });
 

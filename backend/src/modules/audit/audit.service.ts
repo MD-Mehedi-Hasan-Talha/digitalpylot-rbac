@@ -17,7 +17,7 @@ export class AuditService {
           action: params.action,
           targetType: params.targetType || null,
           targetId: params.targetId || null,
-          metadata: params.metadata || null,
+          metadata: params.metadata as any || null,
         },
       });
     } catch (error) {

@@ -38,8 +38,8 @@ export class AuthService {
         permissions,
         jti,
       },
-      config.jwtSecret,
-      { expiresIn: config.jwtAccessExpiresIn }
+      config.jwtSecret!,
+      { expiresIn: config.jwtAccessExpiresIn as any }
     );
 
     const refreshJti = uuidv4();
@@ -49,8 +49,8 @@ export class AuthService {
         jti: refreshJti,
         type: 'refresh',
       },
-      config.jwtRefreshSecret,
-      { expiresIn: config.jwtRefreshExpiresIn }
+      config.jwtRefreshSecret!,
+      { expiresIn: config.jwtRefreshExpiresIn as any }
     );
 
     return {
@@ -105,8 +105,8 @@ export class AuthService {
         permissions,
         jti,
       },
-      config.jwtSecret,
-      { expiresIn: config.jwtAccessExpiresIn }
+      config.jwtSecret!,
+      { expiresIn: config.jwtAccessExpiresIn as any }
     );
 
     return {

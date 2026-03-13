@@ -12,7 +12,7 @@ import permissionRoutes from './modules/permissions/permission.routes';
 import { PermissionService } from './modules/permissions/permission.service';
 import userRoutes from './modules/users/user.routes';
 
-const app = express();
+const app: express.Application = express();
 
 // ─── Global Middleware ───────────────────────────────────────────────────────
 app.use(cors({
