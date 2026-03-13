@@ -80,6 +80,7 @@ DigitalPylot is a premium enterprise-grade administration portal featuring a rob
 | **System Admin** | `admin@test.com` | `Admin@123` |
 | **Workspace Manager** | `manager@test.com` | `Manager@123` |
 | **Support Agent** | `agent@test.com` | `Agent@123` |
+| **Customer** | `customer@test.com` | `Customer@123` |
 
 ---
 
