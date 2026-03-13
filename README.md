@@ -44,7 +44,7 @@ DigitalPylot is a premium enterprise-grade administration portal featuring a rob
 ### Prerequisites
 - [Node.js](https://nodejs.org/) (v18+)
 - [pnpm](https://pnpm.io/)
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- PostgreSQL (Installed locally)
 
 ### Installation & Setup
 
@@ -57,7 +57,6 @@ DigitalPylot is a premium enterprise-grade administration portal featuring a rob
 2. **Backend Setup**:
    ```bash
    cd backend
-   docker-compose up -d  # Spin up PostgreSQL
    pnpm install
    npx prisma migrate dev
    pnpm run seed         # Populate roles and users
