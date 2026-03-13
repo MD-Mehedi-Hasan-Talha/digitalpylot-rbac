@@ -1,0 +1,194 @@
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: var(--bg-sidebar);
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border-light);
+  padding: 16px;
+  position: sticky;
+  top: 0;
+}
+
+.topArea {
+  margin-bottom: 24px;
+}
+
+.overlayBrand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  margin-bottom: 20px;
+}
+
+.logoBox {
+  display: flex;
+  align-items: center;
+}
+
+.brandName {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+.collapseBtn {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+}
+
+.workspaceSwitcher {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-medium);
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  cursor: pointer;
+}
+
+.wsAvatar {
+  width: 28px;
+  height: 28px;
+  background: #F8B195;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 12px;
+  color: white;
+}
+
+.wsInfo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+.wsName {
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.wsId {
+  font-size: 10px;
+  color: var(--text-light);
+}
+
+.scrollArea {
+  flex: 1;
+  overflow-y: auto;
+  margin-right: -8px;
+  padding-right: 8px;
+}
+
+.scrollArea::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollArea::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+.sectionLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-light);
+  text-transform: uppercase;
+  margin: 24px 0 12px 10px;
+  letter-spacing: 0.05em;
+}
+
+.navSection {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text-dim);
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.navItem:hover {
+  background: rgba(253, 109, 63, 0.05);
+  color: var(--primary);
+}
+
+.active {
+  background: var(--bg-main) !important;
+  color: var(--primary) !important;
+  box-shadow: 0 2px 8px rgba(253, 109, 63, 0.1);
+  font-weight: 600;
+}
+
+.navIcon {
+  font-size: 16px;
+  width: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.hasSub {
+  justify-content: space-between;
+}
+
+.chevron {
+  opacity: 0.5;
+}
+
+.subNav {
+  padding-left: 32px;
+  margin-top: 4px;
+  border-left: 1px solid var(--border-medium);
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.subItem {
+  display: block;
+  padding: 6px 10px;
+  font-size: 13px;
+  color: var(--text-dim);
+  text-decoration: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.subItem:hover {
+  background: rgba(0, 0, 0, 0.03);
+  color: var(--text-main);
+}
+
+.sidebarFooter {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}

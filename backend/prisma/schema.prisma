@@ -1,0 +1,100 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Role {
+  id    String @id @default(uuid()) @db.Uuid
+  name  String @unique @db.VarChar(50)
+  level Int
+
+  users           User[]
+  rolePermissions RolePermission[]
+
+  @@map("roles")
+}
+
+model Permission {
+  id       String  @id @default(uuid()) @db.Uuid
+  atom     String  @unique @db.VarChar(100)
+  label    String  @db.VarChar(150)
+  category String? @db.VarChar(50)
+
+  rolePermissions RolePermission[]
+  userPermissions UserPermission[]
+
+  @@map("permissions")
+}
+
+model User {
+  id           String   @id @default(uuid()) @db.Uuid
+  email        String   @unique @db.VarChar(255)
+  passwordHash String   @map("password_hash") @db.VarChar(255)
+  name         String   @db.VarChar(150)
+  roleId       String   @map("role_id") @db.Uuid
+  managerId    String?  @map("manager_id") @db.Uuid
+  status       String   @default("active") @db.VarChar(20)
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz()
+  updatedAt    DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz()
+
+  role    Role  @relation(fields: [roleId], references: [id])
+  manager User? @relation("UserManager", fields: [managerId], references: [id])
+
+  managedUsers    User[]           @relation("UserManager")
+  userPermissions UserPermission[] @relation("UserPermissions")
+  grantedBy       UserPermission[] @relation("GrantedByUser")
+  auditLogs       AuditLog[]
+
+  @@map("users")
+}
+
+model RolePermission {
+  roleId       String @map("role_id") @db.Uuid
+  permissionId String @map("permission_id") @db.Uuid
+
+  role       Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+  @@map("role_permissions")
+}
+
+model UserPermission {
+  userId       String   @map("user_id") @db.Uuid
+  permissionId String   @map("permission_id") @db.Uuid
+  granted      Boolean
+  grantedById  String?  @map("granted_by") @db.Uuid
+  grantedAt    DateTime @default(now()) @map("granted_at") @db.Timestamptz()
+
+  user       User       @relation("UserPermissions", fields: [userId], references: [id], onDelete: Cascade)
+  permission Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+  grantedByUser User?   @relation("GrantedByUser", fields: [grantedById], references: [id])
+
+  @@id([userId, permissionId])
+  @@map("user_permissions")
+}
+
+model AuditLog {
+  id         String   @id @default(uuid()) @db.Uuid
+  actorId    String?  @map("actor_id") @db.Uuid
+  action     String   @db.VarChar(100)
+  targetType String?  @map("target_type") @db.VarChar(50)
+  targetId   String?  @map("target_id") @db.Uuid
+  metadata   Json?
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz()
+
+  actor User? @relation(fields: [actorId], references: [id])
+
+  @@map("audit_logs")
+}
+
+model TokenBlacklist {
+  jti       String   @id @db.VarChar(255)
+  expiresAt DateTime @map("expires_at") @db.Timestamptz()
+
+  @@map("token_blacklist")
+}
